@@ -24,15 +24,12 @@ import {
   Lock,
   Email,
   Phone,
-  BorderAllRounded,
-  WidthWide,
 } from "@mui/icons-material";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../auth/AuthContext";
 import AuthService from "../../services/AuthService";
 import toast, { Toaster } from "react-hot-toast";
-import { Radius } from "lucide-react";
 
 // Styled Glassy Card
 const GlassCard = styled(Card)({

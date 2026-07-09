@@ -61,7 +61,7 @@ export default function DashboardInventory({ inventory }: DashboardInventoryProp
               const percentage = getCapacityPercentage(item.availableUnits);
 
               return (
-                <Grid item xs={6} sm={4} md={3} key={item.bloodGroup}>
+                <Grid size={{ xs: 6, sm: 4, md: 3 }} key={item.bloodGroup}>
                   <Box
                     sx={{
                       p: 2.5,
