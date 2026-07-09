@@ -24,12 +24,15 @@ import {
   Lock,
   Email,
   Phone,
+  BorderAllRounded,
+  WidthWide,
 } from "@mui/icons-material";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../auth/AuthContext";
 import AuthService from "../../services/AuthService";
 import toast, { Toaster } from "react-hot-toast";
+import { Radius } from "lucide-react";
 
 // Styled Glassy Card
 const GlassCard = styled(Card)({
@@ -53,16 +56,18 @@ const GlassTextField = styled(TextField)({
     borderRadius: "10px",
     color: "#ffffff",
     overflow: "hidden",
-    paddingLeft: 0, // Let the start adornment touch the left edge
+    paddingLeft: 12,
     height: "54px",
     "& fieldset": {
+
       border: "1px solid rgba(255, 255, 255, 0.12)",
+
     },
     "&:hover fieldset": {
-      borderColor: "rgba(255, 255, 255, 0.3)",
+      borderColor: "rgba(6, 5, 5, 0.3)",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "rgba(255, 255, 255, 0.5)",
+      borderColor: "rgba(255, 0, 0, 0.5)",
       borderWidth: "1px",
     },
   },
