@@ -86,9 +86,9 @@ export default function BFNavbar() {
       color="transparent"
       sx={{
         backdropFilter: "blur(20px)",
-        background: "rgba(255,255,255,.75)",
+        background: "rgba(255, 255, 255, 0.45)",
         borderBottom: "1px solid",
-        borderColor: "divider",
+        borderColor: "rgba(211, 47, 47, 0.08)",
       }}
     >
       <Toolbar
@@ -102,6 +102,8 @@ export default function BFNavbar() {
             variant="h5"
             sx={{
               fontWeight: 800,
+              color: "#111827",
+              letterSpacing: "-0.5px",
             }}
           >
             BloodFlow360
@@ -110,6 +112,7 @@ export default function BFNavbar() {
           <Typography
             color="text.secondary"
             variant="body2"
+            sx={{ fontSize: "0.85rem", fontWeight: 500 }}
           >
             Enterprise Blood Bank Platform
           </Typography>
@@ -123,7 +126,7 @@ export default function BFNavbar() {
           }}
         >
           <TextField
-            placeholder="Search..."
+            placeholder="Search transactions, donors..."
             size="small"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -132,13 +135,27 @@ export default function BFNavbar() {
               width: 320,
               "& .MuiOutlinedInput-root": {
                 borderRadius: "14px",
-                bgcolor: "#fff",
+                bgcolor: "rgba(255, 255, 255, 0.6)",
+                border: "1px solid rgba(211, 47, 47, 0.08)",
+                transition: "all 0.2s",
+                "& fieldset": {
+                  border: "none",
+                },
+                "&:hover": {
+                  bgcolor: "rgba(255, 255, 255, 0.8)",
+                  boxShadow: "0 4px 12px rgba(128, 6, 25, 0.02)",
+                },
+                "&.Mui-focused": {
+                  bgcolor: "#ffffff",
+                  boxShadow: "0 4px 20px rgba(128, 6, 25, 0.04)",
+                  border: "1px solid rgba(211, 47, 47, 0.25)",
+                },
               },
             }}
             slotProps={{
               input: {
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment position="start" sx={{ color: "text.secondary" }}>
                     <Search size={18} />
                   </InputAdornment>
                 ),
@@ -153,12 +170,15 @@ export default function BFNavbar() {
             <IconButton
               onClick={handleBellClick}
               sx={{
-                bgcolor: "#fff",
-                border: "1px solid",
-                borderColor: "divider",
+                bgcolor: "rgba(255, 255, 255, 0.6)",
+                border: "1px solid rgba(211, 47, 47, 0.08)",
+                boxShadow: "0 4px 10px rgba(0, 0, 0, 0.02)",
                 "&:hover": {
-                  bgcolor: "#f8fafc",
+                  bgcolor: "rgba(255, 255, 255, 0.9)",
+                  transform: "translateY(-1px)",
+                  boxShadow: "0 6px 15px rgba(128, 6, 25, 0.04)",
                 },
+                transition: "all 0.2s",
               }}
             >
               <Bell size={18} />
@@ -184,7 +204,10 @@ export default function BFNavbar() {
                   width: 320,
                   p: 2,
                   borderRadius: "16px",
-                  boxShadow: "0 12px 30px rgba(0,0,0,.08)",
+                  boxShadow: "0 12px 30px rgba(128, 6, 25, 0.06)",
+                  border: "1px solid rgba(211, 47, 47, 0.08)",
+                  background: "rgba(255, 255, 255, 0.95)",
+                  backdropFilter: "blur(12px)",
                 }
               }
             }}
@@ -214,12 +237,15 @@ export default function BFNavbar() {
           <IconButton
             onClick={() => navigate("/settings")}
             sx={{
-              bgcolor: "#fff",
-              border: "1px solid",
-              borderColor: "divider",
+              bgcolor: "rgba(255, 255, 255, 0.6)",
+              border: "1px solid rgba(211, 47, 47, 0.08)",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.02)",
               "&:hover": {
-                bgcolor: "#f8fafc",
+                bgcolor: "rgba(255, 255, 255, 0.9)",
+                transform: "translateY(-1px)",
+                boxShadow: "0 6px 15px rgba(128, 6, 25, 0.04)",
               },
+              transition: "all 0.2s",
             }}
           >
             <Settings size={18} />
@@ -232,16 +258,25 @@ export default function BFNavbar() {
             sx={{
               alignItems: "center",
               cursor: "pointer",
-              p: 0.5,
+              p: 0.75,
+              pr: 1.5,
               borderRadius: "12px",
+              border: "1px solid rgba(211, 47, 47, 0.08)",
+              bgcolor: "rgba(255, 255, 255, 0.5)",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.01)",
               "&:hover": {
-                bgcolor: "action.hover",
-              }
+                bgcolor: "rgba(255, 255, 255, 0.8)",
+                transform: "translateY(-1px)",
+                boxShadow: "0 6px 15px rgba(128,6,25,0.03)",
+              },
+              transition: "all 0.2s",
             }}
           >
             <Avatar
               sx={{
                 bgcolor: "primary.main",
+                border: "2px solid #ffffff",
+                boxShadow: "0 4px 10px rgba(211, 47, 47, 0.15)",
               }}
             >
               {user?.username?.charAt(0).toUpperCase() || "U"}

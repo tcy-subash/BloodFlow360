@@ -1,7 +1,4 @@
-// import Grid from "@mui/material/Grid";
-
-import { Grid } from "@mui/material";
-
+import Grid from "@mui/material/Grid";
 import {
   Box,
   Chip,
@@ -10,7 +7,7 @@ import {
 } from "@mui/material";
 
 import { motion } from "framer-motion";
-// import CountUp from "react-countup";
+import CountUp from "react-countup";
 
 import {
   Droplets,
@@ -21,39 +18,10 @@ import {
 } from "lucide-react";
 
 import GlassCard from "../../design-system/cards/GlassCard";
-
 import type { DashboardStat } from "../../types/dashboard";
 
-// const stats = [
-//   {
-//     title: "Blood Units",
-//     value: 80,
-//     trend: "+12%",
-//     color: "#E53935",
-//     icon: Droplets,
-//   },
-//   {
-//     title: "Registered Donors",
-//     value: 100,
-//     trend: "+18%",
-//     color: "#196cd2",
-//     icon: Users,
-//   },
-//   {
-//     title: "Hospitals",
-//     value: 18,
-//     trend: "+4%",
-//     color: "#43A047",
-//     icon: Building2,
-//   },
-//   {
-//     title: "Pending Requests",
-//     value: 12,
-//     trend: "-2%",
-//     color: "#FB8C00",
-//     icon: ClipboardList,
-//   },
-// ];
+// Safe CountUp component reference to handle bundler interop
+const CountUpComponent = (CountUp as any).default || CountUp;
 
 interface DashboardStatsProps {
   stats: DashboardStat[];
@@ -66,13 +34,13 @@ export default function DashboardStats({
     <Grid container spacing={3}>
       {stats.map((item, index) => {
         const Icon =
-  item.icon === "blood"
-    ? Droplets
-    : item.icon === "users"
-    ? Users
-    : item.icon === "hospital"
-    ? Building2
-    : ClipboardList;
+          item.icon === "blood"
+            ? Droplets
+            : item.icon === "users"
+            ? Users
+            : item.icon === "hospital"
+            ? Building2
+            : ClipboardList;
 
         return (
           <Grid
@@ -90,10 +58,11 @@ export default function DashboardStats({
               }}
               transition={{
                 delay: index * 0.08,
+                duration: 0.4,
               }}
               whileHover={{
-                y: -8,
-                scale: 1.02,
+                y: -6,
+                scale: 1.01,
               }}
             >
               <GlassCard>
@@ -106,57 +75,57 @@ export default function DashboardStats({
                 >
                   <Box>
                     <Typography
+                      variant="body2"
                       color="text.secondary"
+                      sx={{ fontWeight: 600, letterSpacing: "0.2px" }}
                     >
                       {item.title}
                     </Typography>
 
                     <Typography
-                        variant="h3"
-                        sx={{
+                      variant="h3"
+                      sx={{
                         mt: 1,
-                        fontWeight: 800,
-                    }}>
-                    {item.value}
+                        fontWeight: 850,
+                        color: "#111827",
+                        letterSpacing: "-1px",
+                      }}
+                    >
+                      <CountUpComponent end={item.value} duration={1.5} separator="," />
                     </Typography>
 
                     <Chip
-                      icon={
-                        <TrendingUp
-                          size={14}
-                        />
-                      }
-                      label={`${item.percentageChange}%`}
-                      color="success"
+                      icon={<TrendingUp size={14} />}
+                      label={`${item.percentageChange > 0 ? "+" : ""}${item.percentageChange}% this month`}
                       size="small"
                       sx={{
                         mt: 1.5,
+                        bgcolor: "rgba(22, 163, 74, 0.08)",
+                        color: "#16A34A",
+                        fontWeight: 700,
+                        border: "1px solid rgba(22, 163, 74, 0.15)",
+                        "& .MuiChip-icon": {
+                          color: "#16A34A !important",
+                        }
                       }}
                     />
                   </Box>
 
                   <Box
                     sx={{
-                      width: 60,
-                      height: 62,
-
-                      borderRadius: "22px",
-
-                      bgcolor: item.color,
-
+                      width: 56,
+                      height: 56,
+                      borderRadius: "18px",
+                      bgcolor: `${item.color}15`,
+                      color: item.color,
+                      border: `1px solid ${item.color}25`,
                       display: "flex",
-
                       justifyContent: "center",
-
                       alignItems: "center",
-
-                      color: "#fff",
-
-                      boxShadow:
-                        `0 15px 35px ${item.color}55`,
+                      boxShadow: `0 8px 20px ${item.color}15`,
                     }}
                   >
-                    <Icon size={30} />
+                    <Icon size={24} style={{ strokeWidth: 2.2 }} />
                   </Box>
                 </Stack>
               </GlassCard>

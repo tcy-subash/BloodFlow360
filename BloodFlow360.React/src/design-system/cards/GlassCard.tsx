@@ -11,6 +11,7 @@ interface GlassCardProps {
 
 export default function GlassCard({
   children,
+  sx = {},
 }: GlassCardProps) {
   return (
     <Card
@@ -37,6 +38,7 @@ export default function GlassCard({
           boxShadow:
             "0 35px 70px rgba(15,23,42,.15)",
         },
+        ...sx,
       }}
     >
       <CardContent
