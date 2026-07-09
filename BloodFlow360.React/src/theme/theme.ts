@@ -63,9 +63,9 @@ const theme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          background: "rgba(255, 255, 255, 0.95)",
+          background: "rgba(255, 255, 255, 0.65)",
 
-          backdropFilter: "blur(20px)",
+          backdropFilter: "blur(20px) saturate(120%)",
 
           borderLeft: "1px solid rgba(211, 47, 47, 0.1)",
 

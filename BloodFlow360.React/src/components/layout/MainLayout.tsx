@@ -2,12 +2,15 @@ import {
   Box,
 } from "@mui/material";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 import BFSidebar from "../../design-system/navigation/BFSidebar";
 import BFNavbar from "../../design-system/navigation/BFNavbar";
 
 export default function MainLayout() {
+  const location = useLocation();
+
   return (
     <Box
       sx={{
@@ -43,7 +46,18 @@ export default function MainLayout() {
             overflowY: "auto",
           }}
         >
-          <Outlet />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              style={{ display: "flex", flexDirection: "column", flexGrow: 1, gap: "inherit" }}
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
         </Box>
       </Box>
     </Box>
