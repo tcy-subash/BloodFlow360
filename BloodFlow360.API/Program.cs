@@ -46,12 +46,23 @@ builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 // Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Allowed origins: localhost for dev + production Vercel URL set via FRONTEND_URL env var
+var allowedOrigins = new List<string>
+{
+    "http://localhost:5173",
+    "http://localhost:5174"
+};
+
+var frontendUrl = builder.Configuration["FRONTEND_URL"];
+if (!string.IsNullOrWhiteSpace(frontendUrl))
+    allowedOrigins.Add(frontendUrl);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactPolicy", policy =>
     {
         policy
-            .WithOrigins("http://localhost:5173", "http://localhost:5174")
+            .WithOrigins([.. allowedOrigins])
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -101,17 +112,17 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Middleware
+// Swagger available in all environments so the Railway-hosted API can be tested
+app.MapOpenApi();
+app.UseSwagger();
+app.UseSwaggerUI();
+
+// Railway handles TLS termination — only redirect HTTPS in local development
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
-
-    app.UseSwagger();
-
-    app.UseSwaggerUI();
+    app.UseHttpsRedirection();
 }
 
-app.UseHttpsRedirection();
 
 app.UseCors("ReactPolicy");
 

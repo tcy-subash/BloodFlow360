@@ -80,7 +80,7 @@ function StatCard({
         }}
       >
         <CardContent sx={{ p: 2.5, "&:last-child": { pb: 2.5 } }}>
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
             <Box
               sx={{
                 width: 48,
@@ -99,11 +99,11 @@ function StatCard({
               <Typography
                 variant="body2"
                 color="text.secondary"
-                fontWeight={500}
-              >
+               
+               sx={{ fontWeight: 500 }}>
                 {title}
               </Typography>
-              <Typography variant="h5" fontWeight={700}>
+              <Typography variant="h5" sx={{ fontWeight: 700 }}>
                 {value}
               </Typography>
             </Box>
@@ -242,11 +242,11 @@ export default function InventoryPage() {
 
           return (
             <Box sx={{ width: "100%", pr: 2 }}>
-              <Stack direction="row" justifyContent="space-between" mb={0.5}>
-                <Typography fontSize={12} fontWeight={600} color={isLow ? "error" : "text.primary"}>
+              <Stack direction="row" sx={{ justifyContent: "space-between", mb: 0.5 }}>
+                <Typography color={isLow ? "error" : "text.primary"} sx={{ fontWeight: 600, fontSize: 12 }}>
                   {row.unitsAvailable} / {row.maximumStockLevel}
                 </Typography>
-                <Typography fontSize={11} color="text.secondary">
+                <Typography color="text.secondary" sx={{ fontSize: 11 }}>
                   {percentage}%
                 </Typography>
               </Stack>
@@ -265,7 +265,7 @@ export default function InventoryPage() {
         headerName: "Reserved",
         width: 120,
         renderCell: (params) => (
-          <Typography fontWeight={600} color="text.secondary">
+          <Typography color="text.secondary" sx={{ fontWeight: 600 }}>
             {params.value} Units
           </Typography>
         ),
@@ -347,7 +347,7 @@ export default function InventoryPage() {
     <Stack spacing={3}>
       {/* Page Header */}
       <Box>
-        <Typography variant="h4" fontWeight={800} gutterBottom>
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: 800 }}>
           Blood Inventory
         </Typography>
         <Typography variant="body1" color="text.secondary">
@@ -383,9 +383,7 @@ export default function InventoryPage() {
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
-            alignItems={{ sm: "center" }}
-            justifyContent="space-between"
-          >
+            sx={{ alignItems: { sm: "center" }, justifyContent: "space-between" }}>
             <TextField
               size="small"
               placeholder="Search by blood group..."
@@ -749,11 +747,11 @@ function HistoryDrawer({
       anchor="right"
       open={!!item}
       onClose={onClose}
-      PaperProps={{ sx: { width: { xs: "100%", sm: 440 } } }}
+      slotProps={{ paper: { sx: { width: { xs: "100%", sm: 440 } } } }}
     >
       <Box sx={{ p: 3 }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-          <Typography variant="h6" fontWeight={700}>
+        <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between", mb: 2 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
             Transaction Logs
           </Typography>
           <IconButton onClick={onClose}>
@@ -761,7 +759,7 @@ function HistoryDrawer({
           </IconButton>
         </Stack>
 
-        <Typography variant="body2" color="text.secondary" mb={3}>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
           Audit changes for Blood Group: <strong>{item?.bloodGroupName}</strong>
         </Typography>
 
@@ -770,7 +768,7 @@ function HistoryDrawer({
         {isLoading ? (
           <LinearProgress />
         ) : !logs || logs.length === 0 ? (
-          <Typography color="text.secondary" textAlign="center" py={4}>
+          <Typography color="text.secondary" sx={{ py: 4, textAlign: "center" }}>
             No stock modification history found for this group.
           </Typography>
         ) : (
@@ -778,7 +776,7 @@ function HistoryDrawer({
             {logs.map((log) => (
               <Card key={log.id} variant="outlined" sx={{ borderRadius: 3 }}>
                 <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
-                  <Stack direction="row" justifyContent="space-between" mb={1}>
+                  <Stack direction="row" sx={{ justifyContent: "space-between", mb: 1 }}>
                     <Chip
                       label={log.transactionType}
                       size="small"
@@ -791,28 +789,26 @@ function HistoryDrawer({
                       }
                       sx={{ fontWeight: 700, fontSize: 10 }}
                     />
-                    <Typography fontSize={11} color="text.secondary">
+                    <Typography color="text.secondary" sx={{ fontSize: 11 }}>
                       {new Date(log.createdAt).toLocaleString("en-IN")}
                     </Typography>
                   </Stack>
 
-                  <Typography fontSize={13} mb={1}>
+                  <Typography sx={{ fontSize: 13, mb: 1 }}>
                     Stock updated: <strong>{log.previousStock} Units</strong> →{" "}
                     <strong>{log.currentStock} Units</strong> (Change: {log.quantity > 0 ? `+${log.quantity}` : log.quantity})
                   </Typography>
 
                   {log.remarks && (
                     <Typography
-                      fontSize={12}
-                      sx={{
-                        p: 1,
+                     
+                      sx={{ p: 1,
                         bgcolor: "#F8FAFC",
                         borderRadius: 2,
                         color: "text.secondary",
-                        fontStyle: "italic",
-                      }}
+                        fontStyle: "italic", fontSize: 12 }}
                     >
-                      "{log.remarks}"
+                      {log.remarks}
                     </Typography>
                   )}
                 </CardContent>

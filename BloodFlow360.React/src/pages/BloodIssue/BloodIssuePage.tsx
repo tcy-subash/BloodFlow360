@@ -74,7 +74,7 @@ function StatCard({
         }}
       >
         <CardContent sx={{ p: 2.5, "&:last-child": { pb: 2.5 } }}>
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
             <Box
               sx={{
                 width: 48,
@@ -93,11 +93,11 @@ function StatCard({
               <Typography
                 variant="body2"
                 color="text.secondary"
-                fontWeight={500}
-              >
+               
+               sx={{ fontWeight: 500 }}>
                 {title}
               </Typography>
-              <Typography variant="h5" fontWeight={700}>
+              <Typography variant="h5" sx={{ fontWeight: 700 }}>
                 {value}
               </Typography>
             </Box>
@@ -179,7 +179,7 @@ export default function BloodIssuePage() {
         headerName: "Issue Number",
         width: 140,
         renderCell: (params) => (
-          <Typography fontWeight={700} color="primary" fontSize={13}>
+          <Typography color="primary" sx={{ fontWeight: 700, fontSize: 13 }}>
             {params.value}
           </Typography>
         ),
@@ -189,7 +189,7 @@ export default function BloodIssuePage() {
         headerName: "Req Number",
         width: 130,
         renderCell: (params) => (
-          <Typography fontWeight={600} color="text.secondary" fontSize={13}>
+          <Typography color="text.secondary" sx={{ fontWeight: 600, fontSize: 13 }}>
             {params.value || "—"}
           </Typography>
         ),
@@ -282,7 +282,7 @@ export default function BloodIssuePage() {
     <Stack spacing={3}>
       {/* Header */}
       <Box>
-        <Typography variant="h4" fontWeight={800} gutterBottom>
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: 800 }}>
           Blood Dispatches (Issues)
         </Typography>
         <Typography variant="body1" color="text.secondary">
@@ -318,9 +318,7 @@ export default function BloodIssuePage() {
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
-            alignItems={{ sm: "center" }}
-            justifyContent="space-between"
-          >
+            sx={{ alignItems: { sm: "center" }, justifyContent: "space-between" }}>
             <TextField
               size="small"
               placeholder="Search issue ID, request ID, receiver or hospital..."
@@ -616,11 +614,11 @@ function BloodIssueProfileDrawer({
       anchor="right"
       open={!!issue}
       onClose={onClose}
-      PaperProps={{ sx: { width: { xs: "100%", sm: 420 } } }}
+      slotProps={{ paper: { sx: { width: { xs: "100%", sm: 420 } } } }}
     >
       <Box sx={{ p: 3 }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" mb={3}>
-          <Typography variant="h6" fontWeight={700}>
+        <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between", mb: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
             Dispatch Slip details
           </Typography>
           <IconButton onClick={onClose}>
@@ -636,7 +634,7 @@ function BloodIssueProfileDrawer({
           }}
         >
           <CardContent>
-            <Stack alignItems="center" spacing={1}>
+            <Stack spacing={1} sx={{ alignItems: "center" }}>
               <Box
                 sx={{
                   width: 56,
@@ -650,7 +648,7 @@ function BloodIssueProfileDrawer({
               >
                 <LocalShipping sx={{ fontSize: 28 }} />
               </Box>
-              <Typography variant="h6" fontWeight={700}>
+              <Typography variant="h6" sx={{ fontWeight: 700 }}>
                 {issue.issueNumber}
               </Typography>
               <Chip
@@ -671,13 +669,13 @@ function BloodIssueProfileDrawer({
               <Typography
                 variant="caption"
                 color="text.secondary"
-                fontWeight={600}
-                textTransform="uppercase"
-                letterSpacing={0.5}
-              >
+               
+               
+               
+               sx={{ fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>
                 {f.label}
               </Typography>
-              <Typography variant="body2" fontWeight={500}>
+              <Typography variant="body2" sx={{ fontWeight: 500 }}>
                 {f.value}
               </Typography>
               {i < fields.length - 1 && <Divider sx={{ mt: 1 }} />}

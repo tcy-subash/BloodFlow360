@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodFlow360.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodFlow360.Shared", "BloodFlow360.Shared\BloodFlow360.Shared.csproj", "{FA4D41FB-BD0F-4946-8D6E-DDE0F80FD05D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodFlow360.Application.UnitTests", "BloodFlow360.Application.UnitTests\BloodFlow360.Application.UnitTests.csproj", "{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{FA4D41FB-BD0F-4946-8D6E-DDE0F80FD05D}.Release|x64.Build.0 = Release|Any CPU
 		{FA4D41FB-BD0F-4946-8D6E-DDE0F80FD05D}.Release|x86.ActiveCfg = Release|Any CPU
 		{FA4D41FB-BD0F-4946-8D6E-DDE0F80FD05D}.Release|x86.Build.0 = Release|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Debug|x64.Build.0 = Debug|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Debug|x86.Build.0 = Debug|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Release|x64.ActiveCfg = Release|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Release|x64.Build.0 = Release|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Release|x86.ActiveCfg = Release|Any CPU
+		{D60AC89B-86D1-4075-BF3B-4FDF8CEEB8C6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

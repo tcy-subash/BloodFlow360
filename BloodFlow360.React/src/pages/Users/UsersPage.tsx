@@ -37,7 +37,7 @@ import {
   Visibility,
   People,
   AdminPanelSettings,
-  Lock,
+  // Lock,
   Close,
   Shield,
   VpnKey,
@@ -81,7 +81,7 @@ function StatCard({
         }}
       >
         <CardContent sx={{ p: 2.5, "&:last-child": { pb: 2.5 } }}>
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Stack direction="row" sx={{ alignItems: "center" }} spacing={2}>
             <Box
               sx={{
                 width: 48,
@@ -100,11 +100,11 @@ function StatCard({
               <Typography
                 variant="body2"
                 color="text.secondary"
-                fontWeight={500}
+                sx={{ fontWeight: 500 }}
               >
                 {title}
               </Typography>
-              <Typography variant="h5" fontWeight={700}>
+              <Typography variant="h5" sx={{ fontWeight: 700 }}>
                 {value}
               </Typography>
             </Box>
@@ -201,7 +201,7 @@ export default function UsersPage() {
         headerName: "Username",
         width: 150,
         renderCell: (params) => (
-          <Typography fontWeight={700} color="primary" fontSize={13}>
+          <Typography color="primary" sx={{ fontWeight: 700, fontSize: 13 }}>
             {params.value}
           </Typography>
         ),
@@ -221,7 +221,7 @@ export default function UsersPage() {
         headerName: "Assigned Roles",
         width: 180,
         renderCell: (params) => (
-          <Stack direction="row" spacing={0.5} flexWrap="wrap" useFlexGap sx={{ pt: 0.5 }}>
+          <Stack direction="row" spacing={0.5} sx={{ flexWrap: "wrap", pt: 0.5 }}>
             {(params.value as string[] || []).map((role) => (
               <Chip
                 key={role}
@@ -305,7 +305,7 @@ export default function UsersPage() {
     <Stack spacing={3}>
       {/* Header */}
       <Box>
-        <Typography variant="h4" fontWeight={800} gutterBottom>
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: 800 }}>
           User Accounts & Roles
         </Typography>
         <Typography variant="body1" color="text.secondary">
@@ -341,8 +341,7 @@ export default function UsersPage() {
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
-            alignItems={{ sm: "center" }}
-            justifyContent="space-between"
+            sx={{ alignItems: { sm: "center" }, justifyContent: "space-between" }}
           >
             <TextField
               size="small"
@@ -566,7 +565,7 @@ function UserFormDialog({
             <Select
               multiple
               value={form.roles}
-              onChange={() => {}}
+              onChange={() => { }}
               input={<OutlinedInput label="Assigned Roles" />}
               renderValue={(selected) => (selected as string[]).join(", ")}
             >
@@ -674,11 +673,11 @@ function UserProfileDrawer({
       anchor="right"
       open={!!user}
       onClose={onClose}
-      PaperProps={{ sx: { width: { xs: "100%", sm: 420 } } }}
+      slotProps={{ paper: { sx: { width: { xs: "100%", sm: 420 } } } }}
     >
       <Box sx={{ p: 3 }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" mb={3}>
-          <Typography variant="h6" fontWeight={700}>
+        <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center", mb: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
             User Profile details
           </Typography>
           <IconButton onClick={onClose}>
@@ -694,7 +693,7 @@ function UserProfileDrawer({
           }}
         >
           <CardContent>
-            <Stack alignItems="center" spacing={1}>
+            <Stack sx={{ alignItems: "center" }} spacing={1}>
               <Box
                 sx={{
                   width: 56,
@@ -710,7 +709,7 @@ function UserProfileDrawer({
               >
                 {user.username.charAt(0).toUpperCase()}
               </Box>
-              <Typography variant="h6" fontWeight={700}>
+              <Typography variant="h6" sx={{ fontWeight: 700 }}>
                 {user.username}
               </Typography>
               <Stack direction="row" spacing={0.5}>
@@ -748,13 +747,11 @@ function UserProfileDrawer({
               <Typography
                 variant="caption"
                 color="text.secondary"
-                fontWeight={600}
-                textTransform="uppercase"
-                letterSpacing={0.5}
+                sx={{ fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}
               >
                 {f.label}
               </Typography>
-              <Typography variant="body2" fontWeight={500}>
+              <Typography variant="body2" sx={{ fontWeight: 500 }}>
                 {f.value}
               </Typography>
               {i < fields.length - 1 && <Divider sx={{ mt: 1 }} />}

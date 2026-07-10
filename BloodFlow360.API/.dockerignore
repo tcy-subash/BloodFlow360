@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.git/
+**/node_modules/
+*.user
+*.suo
+.DS_Store
+Thumbs.db
+**/*.md
+**/TestResults/

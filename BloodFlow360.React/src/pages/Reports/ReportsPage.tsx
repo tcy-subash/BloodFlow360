@@ -43,6 +43,7 @@ import {
   TableRows,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 import { useInventory } from "../../hooks/useInventory";
 import { useRequestsPaged } from "../../hooks/useRequests";
@@ -170,9 +171,9 @@ export default function ReportsPage() {
   return (
     <Stack spacing={3} className="printable-reports">
       {/* Header */}
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between" }}>
         <Box>
-          <Typography variant="h4" fontWeight={800} gutterBottom>
+          <Typography variant="h4" gutterBottom sx={{ fontWeight: 800 }}>
             Reports & Analytics
           </Typography>
           <Typography variant="body1" color="text.secondary">
@@ -223,10 +224,10 @@ export default function ReportsPage() {
           <Grid size={{ xs: 12 }}>
             <Card>
               <CardContent>
-                <Typography variant="h6" fontWeight={700} gutterBottom>
+                <Typography variant="h6" gutterBottom sx={{ fontWeight: 700 }}>
                   Donation vs Dispatch Monthly Trends
                 </Typography>
-                <Typography variant="body2" color="text.secondary" mb={3}>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
                   Historical log counts comparing incoming donations to dispatched shipments.
                 </Typography>
                 <Box sx={{ height: 350, width: "100%" }}>
@@ -277,10 +278,10 @@ export default function ReportsPage() {
           <Grid size={{ xs: 12, md: 6 }}>
             <Card sx={{ height: "100%" }}>
               <CardContent>
-                <Typography variant="h6" fontWeight={700} gutterBottom>
+                <Typography variant="h6" gutterBottom sx={{ fontWeight: 700 }}>
                   Hospital Requests Status Share
                 </Typography>
-                <Typography variant="body2" color="text.secondary" mb={3}>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
                   Overview of current request distribution across validation phases.
                 </Typography>
                 <Box sx={{ height: 300, display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -311,15 +312,15 @@ export default function ReportsPage() {
           <Grid size={{ xs: 12, md: 6 }}>
             <Card sx={{ height: "100%" }}>
               <CardContent>
-                <Typography variant="h6" fontWeight={700} mb={3}>
+                <Typography variant="h6" sx={{ fontWeight: 700, mb: 3 }}>
                   Key Performance Summary
                 </Typography>
                 <Stack spacing={2.5}>
                   <Box>
-                    <Typography variant="caption" color="text.secondary" fontWeight={600}>
+                    <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
                       REQUEST VALIDATION RATE
                     </Typography>
-                    <Typography variant="h4" fontWeight={800} color="success.main">
+                    <Typography variant="h4" color="success.main" sx={{ fontWeight: 800 }}>
                       {Math.round(
                         ((requests.filter((r) => r.status === "Approved" || r.status === "Issued").length) /
                           (requests.length || 1)) *
@@ -332,10 +333,10 @@ export default function ReportsPage() {
                   </Box>
                   <Divider />
                   <Box>
-                    <Typography variant="caption" color="text.secondary" fontWeight={600}>
+                    <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
                       EMERGENCY COMPLIANCE RATE
                     </Typography>
-                    <Typography variant="h4" fontWeight={800} color="error.main">
+                    <Typography variant="h4" color="error.main" sx={{ fontWeight: 800 }}>
                       100%
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
@@ -344,10 +345,10 @@ export default function ReportsPage() {
                   </Box>
                   <Divider />
                   <Box>
-                    <Typography variant="caption" color="text.secondary" fontWeight={600}>
+                    <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
                       TOTAL ACTIVE DONORS REGISTERED
                     </Typography>
-                    <Typography variant="h4" fontWeight={800}>
+                    <Typography variant="h4" sx={{ fontWeight: 800 }}>
                       {donors.length} Donors
                     </Typography>
                   </Box>
@@ -363,10 +364,10 @@ export default function ReportsPage() {
           <Grid size={{ xs: 12 }}>
             <Card>
               <CardContent>
-                <Typography variant="h6" fontWeight={700} gutterBottom>
+                <Typography variant="h6" gutterBottom sx={{ fontWeight: 700 }}>
                   Available Stock Level (ML) vs Safety Thresholds
                 </Typography>
-                <Typography variant="body2" color="text.secondary" mb={3}>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
                   Comparison of available units against configured safety threshold limits by blood group.
                 </Typography>
                 <Box sx={{ height: 350, width: "100%" }}>

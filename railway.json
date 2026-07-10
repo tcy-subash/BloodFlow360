@@ -1,0 +1,15 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "BloodFlow360.API/Dockerfile",
+    "buildCommand": ""
+  },
+  "deploy": {
+    "startCommand": "dotnet BloodFlow360.API.dll",
+    "healthcheckPath": "/swagger",
+    "healthcheckTimeout": 300,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 3
+  }
+}

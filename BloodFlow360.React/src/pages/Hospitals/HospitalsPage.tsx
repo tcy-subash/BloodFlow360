@@ -79,7 +79,7 @@ function StatCard({
         }}
       >
         <CardContent sx={{ p: 2.5, "&:last-child": { pb: 2.5 } }}>
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
             <Box
               sx={{
                 width: 48,
@@ -98,11 +98,11 @@ function StatCard({
               <Typography
                 variant="body2"
                 color="text.secondary"
-                fontWeight={500}
-              >
+               
+               sx={{ fontWeight: 500 }}>
                 {title}
               </Typography>
-              <Typography variant="h5" fontWeight={700}>
+              <Typography variant="h5" sx={{ fontWeight: 700 }}>
                 {value}
               </Typography>
             </Box>
@@ -205,7 +205,7 @@ export default function HospitalsPage() {
         headerName: "Hospital Code",
         width: 130,
         renderCell: (params) => (
-          <Typography fontWeight={700} color="primary" fontSize={13}>
+          <Typography color="primary" sx={{ fontWeight: 700, fontSize: 13 }}>
             {params.value}
           </Typography>
         ),
@@ -215,7 +215,7 @@ export default function HospitalsPage() {
         headerName: "Hospital Name",
         width: 200,
         renderCell: (params) => (
-          <Typography fontWeight={500} fontSize={13}>
+          <Typography sx={{ fontWeight: 500, fontSize: 13 }}>
             {params.value}
           </Typography>
         ),
@@ -311,7 +311,7 @@ export default function HospitalsPage() {
     <Stack spacing={3}>
       {/* Header */}
       <Box>
-        <Typography variant="h4" fontWeight={800} gutterBottom>
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: 800 }}>
           Hospital Directory
         </Typography>
         <Typography variant="body1" color="text.secondary">
@@ -347,9 +347,7 @@ export default function HospitalsPage() {
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
-            alignItems={{ sm: "center" }}
-            justifyContent="space-between"
-          >
+            sx={{ alignItems: { sm: "center" }, justifyContent: "space-between" }}>
             <TextField
               size="small"
               placeholder="Search by name, code, contact or city..."
@@ -663,7 +661,7 @@ function HospitalFormDialog({
 
           <Grid size={{ xs: 12 }}>
             <Divider sx={{ my: 1 }} />
-            <Typography variant="subtitle2" fontWeight={700} color="text.secondary" mb={1}>
+            <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 700, mb: 1 }}>
               Location & Address Info
             </Typography>
           </Grid>
@@ -817,11 +815,11 @@ function HospitalProfileDrawer({
       anchor="right"
       open={!!hospital}
       onClose={onClose}
-      PaperProps={{ sx: { width: { xs: "100%", sm: 420 } } }}
+      slotProps={{ paper: { sx: { width: { xs: "100%", sm: 420 } } } }}
     >
       <Box sx={{ p: 3 }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" mb={3}>
-          <Typography variant="h6" fontWeight={700}>
+        <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between", mb: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
             Partner Details
           </Typography>
           <IconButton onClick={onClose}>
@@ -837,7 +835,7 @@ function HospitalProfileDrawer({
           }}
         >
           <CardContent>
-            <Stack alignItems="center" spacing={1}>
+            <Stack spacing={1} sx={{ alignItems: "center" }}>
               <Box
                 sx={{
                   width: 56,
@@ -851,7 +849,7 @@ function HospitalProfileDrawer({
               >
                 <LocalHospital sx={{ fontSize: 28 }} />
               </Box>
-              <Typography variant="h6" fontWeight={700} textAlign="center">
+              <Typography variant="h6" sx={{ fontWeight: 700, textAlign: "center" }}>
                 {hospital.name}
               </Typography>
               <Chip
@@ -873,13 +871,13 @@ function HospitalProfileDrawer({
               <Typography
                 variant="caption"
                 color="text.secondary"
-                fontWeight={600}
-                textTransform="uppercase"
-                letterSpacing={0.5}
-              >
+               
+               
+               
+               sx={{ fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>
                 {f.label}
               </Typography>
-              <Typography variant="body2" fontWeight={500}>
+              <Typography variant="body2" sx={{ fontWeight: 500 }}>
                 {f.value}
               </Typography>
               {i < fields.length - 1 && <Divider sx={{ mt: 1 }} />}
