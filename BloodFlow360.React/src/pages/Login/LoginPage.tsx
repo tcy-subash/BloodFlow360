@@ -30,6 +30,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../auth/AuthContext";
 import AuthService from "../../services/AuthService";
 import toast, { Toaster } from "react-hot-toast";
+import BorderGlow from "../../design-system/glow/BorderGlow";
+import Antigravity from "../../design-system/glow/Antigravity";
 
 // Styled Glassy Card
 const GlassCard = styled(Card)({
@@ -225,6 +227,29 @@ export default function LoginPage() {
         fontFamily: "'Inter', sans-serif",
       }}
     >
+      {/* Background Antigravity Particle System */}
+      <div style={{ width: "100vw", height: "100vh", position: "absolute", top: 0, left: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
+        <div style={{ width: "1080px", height: "1080px", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+          <Antigravity
+            count={450}
+            magnetRadius={17}
+            ringRadius={8}
+            waveSpeed={0.4}
+            waveAmplitude={1}
+            particleSize={2}
+            lerpSpeed={0.1}
+            color="#FF9FFC"
+            autoAnimate={false}
+            particleVariance={1}
+            rotationSpeed={0}
+            depthFactor={1}
+            pulseSpeed={3}
+            particleShape="capsule"
+            fieldStrength={10}
+          />
+        </div>
+      </div>
+
       {/* Background Orbs for Premium Depth */}
       <Box
         sx={{
@@ -237,6 +262,7 @@ export default function LoginPage() {
           background: "radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%)",
           filter: "blur(50px)",
           pointerEvents: "none",
+          zIndex: 1,
         }}
       />
       <Box
@@ -250,13 +276,25 @@ export default function LoginPage() {
           background: "radial-gradient(circle, rgba(198,40,40,0.2) 0%, rgba(198,40,40,0) 70%)",
           filter: "blur(60px)",
           pointerEvents: "none",
+          zIndex: 1,
         }}
       />
 
       <Toaster position="top-right" reverseOrder={false} />
 
-      <GlassCard>
-        <CardContent sx={{ p: { xs: 4, sm: 5 } }}>
+      <BorderGlow
+        edgeSensitivity={30}
+        glowColor="40 80 80"
+        backgroundColor="rgba(18, 15, 23, 0.45)"
+        borderRadius={28}
+        glowRadius={40}
+        glowIntensity={1}
+        coneSpread={25}
+        animated={false}
+        colors={["#c084fc", "#f472b6", "#38bdf8"]}
+        style={{ width: "100%", maxWidth: "440px", zIndex: 2 }}
+      >
+        <CardContent sx={{ p: { xs: 4, sm: 5 }, color: "#ffffff" }}>
           <Stack spacing={4}>
             {/* Branding Header (Static) */}
             <Stack spacing={1} sx={{ alignItems: "center", mb: 1 }}>
@@ -873,8 +911,8 @@ export default function LoginPage() {
               )}
             </AnimatePresence>
           </Stack>
-        </CardContent>
-      </GlassCard>
-    </Box >
+          </CardContent>
+        </BorderGlow>
+      </Box >
   );
 }
