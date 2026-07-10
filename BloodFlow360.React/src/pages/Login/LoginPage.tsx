@@ -5,7 +5,6 @@ import {
   Alert,
   Box,
   Button,
-  Card,
   CardContent,
   CircularProgress,
   IconButton,
@@ -33,19 +32,7 @@ import toast, { Toaster } from "react-hot-toast";
 import BorderGlow from "../../design-system/glow/BorderGlow";
 import Antigravity from "../../design-system/glow/Antigravity";
 
-// Styled Glassy Card
-const GlassCard = styled(Card)({
-  width: "100%",
-  maxWidth: 440,
-  background: "rgba(255, 255, 255, 0.08)",
-  backdropFilter: "blur(20px)",
-  border: "1px solid rgba(255, 255, 255, 0.15)",
-  borderRadius: 24,
-  boxShadow: "0 15px 35px rgba(0, 0, 0, 0.25), 0 5px 15px rgba(0, 0, 0, 0.15)",
-  overflow: "visible",
-  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-  color: "#ffffff",
-});
+
 
 // Styled Glassy Text Field (no label, matches user image)
 const GlassTextField = styled(TextField)({
@@ -291,7 +278,7 @@ export default function LoginPage() {
         glowIntensity={1}
         coneSpread={25}
         animated={false}
-        colors={["#c084fc", "#f472b6", "#38bdf8"]}
+        colors={["#800619", "#c0c0c0", "#800619"]}
         style={{ width: "100%", maxWidth: "440px", zIndex: 2 }}
       >
         <CardContent sx={{ p: { xs: 4, sm: 5 }, color: "#ffffff" }}>
@@ -911,8 +898,8 @@ export default function LoginPage() {
               )}
             </AnimatePresence>
           </Stack>
-          </CardContent>
-        </BorderGlow>
-      </Box >
+        </CardContent>
+      </BorderGlow>
+    </Box >
   );
 }
