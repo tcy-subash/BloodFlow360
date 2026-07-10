@@ -1,8 +1,10 @@
 using BloodFlow360.Application.DTOs.BloodRequest;
 using BloodFlow360.Application.Interfaces.Services;
 using BloodFlow360.Application.Responses;
+using BloodFlow360.API.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace BloodFlow360.API.Controllers;
 
@@ -12,10 +14,14 @@ namespace BloodFlow360.API.Controllers;
 public class BloodRequestsController : ControllerBase
 {
     private readonly IBloodRequestService _bloodRequestService;
+    private readonly IHubContext<StockHub> _hubContext;
 
-    public BloodRequestsController(IBloodRequestService bloodRequestService)
+    public BloodRequestsController(
+        IBloodRequestService bloodRequestService,
+        IHubContext<StockHub> hubContext)
     {
         _bloodRequestService = bloodRequestService;
+        _hubContext = hubContext;
     }
 
     [HttpGet]
@@ -79,6 +85,8 @@ public class BloodRequestsController : ControllerBase
     public async Task<IActionResult> Create(CreateBloodRequestDto dto)
     {
         await _bloodRequestService.CreateAsync(dto);
+        await _hubContext.Clients.All.SendAsync("UpdateStock");
+        await _hubContext.Clients.All.SendAsync("UpdateDashboard");
 
         return Ok(new ApiResponse<object>
         {
@@ -91,6 +99,8 @@ public class BloodRequestsController : ControllerBase
     public async Task<IActionResult> Update(Guid id, UpdateBloodRequestDto dto)
     {
         await _bloodRequestService.UpdateAsync(id, dto);
+        await _hubContext.Clients.All.SendAsync("UpdateStock");
+        await _hubContext.Clients.All.SendAsync("UpdateDashboard");
 
         return Ok(new ApiResponse<object>
         {
@@ -103,6 +113,8 @@ public class BloodRequestsController : ControllerBase
     public async Task<IActionResult> Delete(Guid id)
     {
         await _bloodRequestService.DeleteAsync(id);
+        await _hubContext.Clients.All.SendAsync("UpdateStock");
+        await _hubContext.Clients.All.SendAsync("UpdateDashboard");
 
         return Ok(new ApiResponse<object>
         {

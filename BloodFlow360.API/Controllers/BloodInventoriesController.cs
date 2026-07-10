@@ -1,8 +1,10 @@
 using BloodFlow360.Application.DTOs.BloodInventory;
 using BloodFlow360.Application.Interfaces.Services;
 using BloodFlow360.Application.Responses;
+using BloodFlow360.API.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace BloodFlow360.API.Controllers;
 
@@ -12,10 +14,14 @@ namespace BloodFlow360.API.Controllers;
 public class BloodInventoriesController : ControllerBase
 {
     private readonly IBloodInventoryService _bloodInventoryService;
+    private readonly IHubContext<StockHub> _hubContext;
 
-    public BloodInventoriesController(IBloodInventoryService bloodInventoryService)
+    public BloodInventoriesController(
+        IBloodInventoryService bloodInventoryService,
+        IHubContext<StockHub> hubContext)
     {
         _bloodInventoryService = bloodInventoryService;
+        _hubContext = hubContext;
     }
 
     [HttpGet]
@@ -77,6 +83,7 @@ public class BloodInventoriesController : ControllerBase
     public async Task<IActionResult> Create(CreateBloodInventoryDto dto)
     {
         await _bloodInventoryService.CreateAsync(dto);
+        await _hubContext.Clients.All.SendAsync("UpdateStock");
 
         return Ok(new ApiResponse<object>
         {
@@ -89,6 +96,7 @@ public class BloodInventoriesController : ControllerBase
     public async Task<IActionResult> Update(Guid id, UpdateBloodInventoryDto dto)
     {
         await _bloodInventoryService.UpdateAsync(id, dto);
+        await _hubContext.Clients.All.SendAsync("UpdateStock");
 
         return Ok(new ApiResponse<object>
         {
@@ -101,6 +109,7 @@ public class BloodInventoriesController : ControllerBase
     public async Task<IActionResult> Delete(Guid id)
     {
         await _bloodInventoryService.DeleteAsync(id);
+        await _hubContext.Clients.All.SendAsync("UpdateStock");
 
         return Ok(new ApiResponse<object>
         {

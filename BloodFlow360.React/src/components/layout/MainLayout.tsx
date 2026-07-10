@@ -7,9 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import BFSidebar from "../../design-system/navigation/BFSidebar";
 import BFNavbar from "../../design-system/navigation/BFNavbar";
+import { useSignalR } from "../../hooks/useSignalR";
 
 export default function MainLayout() {
   const location = useLocation();
+  useSignalR();
 
   return (
     <Box

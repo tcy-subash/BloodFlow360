@@ -25,12 +25,16 @@ import {
   Settings,
   LogOut,
   User as UserIcon,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 import { useAuth } from "../../auth/AuthContext";
+import { useColorMode } from "../../theme/ColorModeContext";
 
 export default function BFNavbar() {
   const { user, logout } = useAuth();
+  const { mode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
 
   // Search state
@@ -162,6 +166,25 @@ export default function BFNavbar() {
               },
             }}
           />
+
+          <IconButton
+            onClick={toggleColorMode}
+            sx={{
+              bgcolor: mode === "dark" ? "rgba(30, 30, 42, 0.6)" : "rgba(255, 255, 255, 0.6)",
+              border: "1px solid",
+              borderColor: mode === "dark" ? "rgba(211, 47, 47, 0.2)" : "rgba(211, 47, 47, 0.08)",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.02)",
+              color: mode === "dark" ? "#F59E0B" : "#4B5563",
+              "&:hover": {
+                bgcolor: mode === "dark" ? "rgba(30, 30, 42, 0.8)" : "rgba(255, 255, 255, 0.9)",
+                transform: "rotate(15deg) scale(1.08)",
+                boxShadow: mode === "dark" ? "0 6px 15px rgba(0,0,0,0.3)" : "0 6px 15px rgba(128, 6, 25, 0.04)",
+              },
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            }}
+          >
+            {mode === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </IconButton>
 
           <Badge
             badgeContent={notifications.length}

@@ -13,17 +13,29 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import App from "./App";
-import theme from "./theme/theme";
+import { ColorModeProvider, useColorMode } from "./theme/ColorModeContext";
+import { getTheme } from "./theme/theme";
 
 const queryClient = new QueryClient();
+
+function MainApp() {
+  const { mode } = useColorMode();
+  const activeTheme = React.useMemo(() => getTheme(mode), [mode]);
+
+  return (
+    <ThemeProvider theme={activeTheme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  );
+}
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
+      <ColorModeProvider>
+        <MainApp />
+      </ColorModeProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );
