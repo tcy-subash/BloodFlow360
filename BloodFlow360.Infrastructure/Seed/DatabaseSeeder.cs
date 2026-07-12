@@ -24,7 +24,10 @@ public static class DatabaseSeeder
                 {
                     await databaseCreator.CreateAsync();
                 }
-                if (!await databaseCreator.HasTablesAsync())
+                
+                // Check if our core tables exist. If not, create them.
+                var tablesExist = await TableExistsAsync(context, "BloodGroups");
+                if (!tablesExist)
                 {
                     await databaseCreator.CreateTablesAsync();
                 }
@@ -249,5 +252,33 @@ public static class DatabaseSeeder
     {
         // We can implement audit logs if needed
         await Task.CompletedTask;
+    }
+
+    private static async Task<bool> TableExistsAsync(DbContext context, string tableName)
+    {
+        try
+        {
+            var conn = context.Database.GetDbConnection();
+            var wasOpen = conn.State == System.Data.ConnectionState.Open;
+            if (!wasOpen)
+                await conn.OpenAsync();
+
+            try
+            {
+                using var cmd = conn.CreateCommand();
+                cmd.CommandText = $"SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE LOWER(table_name) = '{tableName.ToLower()}');";
+                var result = await cmd.ExecuteScalarAsync();
+                return result is bool exists && exists;
+            }
+            finally
+            {
+                if (!wasOpen)
+                    await conn.CloseAsync();
+            }
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
