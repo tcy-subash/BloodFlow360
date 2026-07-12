@@ -27,7 +27,7 @@ import {
   User as UserIcon,
   Sun,
   Moon,
-  Menu,
+  Menu as MenuIcon,
 } from "lucide-react";
 
 import { useAuth } from "../../auth/AuthContext";
@@ -124,7 +124,7 @@ export default function BFNavbar({ onMenuClick }: BFNavbarProps) {
                 },
               }}
             >
-              <Menu size={20} />
+              <MenuIcon size={20} />
             </IconButton>
           )}
           <Box>
