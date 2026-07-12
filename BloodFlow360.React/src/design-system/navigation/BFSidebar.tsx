@@ -13,7 +13,11 @@ import { navigation } from "../../constants/navigation";
 
 import NavItem from "./NavItem";
 
-export default function BFSidebar() {
+interface BFSidebarProps {
+  onClose?: () => void;
+}
+
+export default function BFSidebar({ onClose }: BFSidebarProps) {
   const { user } = useAuth();
 
   return (
@@ -102,6 +106,7 @@ export default function BFSidebar() {
               title={item.title}
               path={item.path}
               icon={item.icon}
+              onClick={onClose}
             />
           ))}
         </Stack>

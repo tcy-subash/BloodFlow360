@@ -7,6 +7,7 @@ export const getTheme = (mode: "light" | "dark") => {
   const isDark = mode === "dark";
 
   return createTheme({
+    spacing: 7,
     palette: {
       mode,
       primary: {
@@ -47,6 +48,19 @@ export const getTheme = (mode: "light" | "dark") => {
     },
 
     components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            fontSize: "14px",
+            "@media (max-width:600px)": {
+              fontSize: "13px",
+            },
+          },
+          body: {
+            scrollbarWidth: "thin",
+          },
+        },
+      },
       MuiCard: {
         styleOverrides: {
           root: {

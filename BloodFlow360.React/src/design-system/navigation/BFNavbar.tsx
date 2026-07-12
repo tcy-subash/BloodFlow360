@@ -27,12 +27,17 @@ import {
   User as UserIcon,
   Sun,
   Moon,
+  Menu,
 } from "lucide-react";
 
 import { useAuth } from "../../auth/AuthContext";
 import { useColorMode } from "../../theme/ColorModeContext";
 
-export default function BFNavbar() {
+interface BFNavbarProps {
+  onMenuClick?: () => void;
+}
+
+export default function BFNavbar({ onMenuClick }: BFNavbarProps) {
   const { user, logout } = useAuth();
   const { mode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
@@ -101,26 +106,48 @@ export default function BFNavbar() {
           minHeight: "80px !important",
         }}
       >
-        <Box>
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: 800,
-              color: "#111827",
-              letterSpacing: "-0.5px",
-            }}
-          >
-            BloodFlow360
-          </Typography>
+        <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
+          {onMenuClick && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={onMenuClick}
+              sx={{
+                display: { md: "none" },
+                p: 1,
+                mr: 0.5,
+                border: "1px solid rgba(211, 47, 47, 0.1)",
+                borderRadius: "12px",
+                bgcolor: "rgba(255, 255, 255, 0.5)",
+                "&:hover": {
+                  bgcolor: "rgba(211, 47, 47, 0.05)",
+                },
+              }}
+            >
+              <Menu size={20} />
+            </IconButton>
+          )}
+          <Box>
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 800,
+                color: "#111827",
+                letterSpacing: "-0.5px",
+              }}
+            >
+              BloodFlow360
+            </Typography>
 
-          <Typography
-            color="text.secondary"
-            variant="body2"
-            sx={{ fontSize: "0.85rem", fontWeight: 500 }}
-          >
-            Enterprise Blood Bank Platform
-          </Typography>
-        </Box>
+            <Typography
+              color="text.secondary"
+              variant="body2"
+              sx={{ fontSize: "0.85rem", fontWeight: 500 }}
+            >
+              Enterprise Blood Bank Platform
+            </Typography>
+          </Box>
+        </Stack>
 
         <Stack
           direction="row"

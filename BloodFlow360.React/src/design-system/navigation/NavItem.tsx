@@ -11,16 +11,19 @@ interface NavItemProps {
   title: string;
   path: string;
   icon: LucideIcon;
+  onClick?: () => void;
 }
 
 export default function NavItem({
   title,
   path,
   icon: Icon,
+  onClick,
 }: NavItemProps) {
   return (
     <NavLink
       to={path}
+      onClick={onClick}
       style={{
         textDecoration: "none",
       }}
