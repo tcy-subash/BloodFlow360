@@ -15,6 +15,9 @@ using BloodFlow360.Infrastructure.Seed;
 using Microsoft.OpenApi.Models;
 using BloodFlow360.API.Hubs;
 
+// Enable legacy timestamp behavior for Npgsql to work with DateTime fields without UTC issues
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<JwtSettings>(
     builder.Configuration.GetSection("JwtSettings"));
@@ -44,8 +47,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 // Database
+var dbProvider = builder.Configuration["DatabaseProvider"] ?? "SqlServer";
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    if (dbProvider.Equals("PostgreSQL", StringComparison.OrdinalIgnoreCase))
+    {
+        options.UseNpgsql(connectionString);
+    }
+    else
+    {
+        options.UseSqlServer(connectionString);
+    }
+});
 // Allowed origins: localhost for dev + production Vercel URL set via FRONTEND_URL env var
 var allowedOrigins = new List<string>
 {

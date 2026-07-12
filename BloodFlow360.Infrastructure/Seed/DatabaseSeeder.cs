@@ -9,7 +9,14 @@ public static class DatabaseSeeder
 {
     public static async Task SeedAsync(ApplicationDbContext context)
     {
-        await context.Database.MigrateAsync();
+        if (context.Database.ProviderName == "Microsoft.EntityFrameworkCore.SqlServer")
+        {
+            await context.Database.MigrateAsync();
+        }
+        else
+        {
+            await context.Database.EnsureCreatedAsync();
+        }
 
         if (!await context.BloodGroups.AnyAsync())
             await SeedBloodGroupsAsync(context);
