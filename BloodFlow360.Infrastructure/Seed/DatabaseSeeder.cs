@@ -2,6 +2,8 @@ using BloodFlow360.Domain.Entities;
 using BloodFlow360.Domain.Entities.Lookups;
 using BloodFlow360.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BloodFlow360.Infrastructure.Seed;
 
@@ -15,7 +17,22 @@ public static class DatabaseSeeder
         }
         else
         {
-            await context.Database.EnsureCreatedAsync();
+            var databaseCreator = context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+            if (databaseCreator != null)
+            {
+                if (!await databaseCreator.ExistsAsync())
+                {
+                    await databaseCreator.CreateAsync();
+                }
+                if (!await databaseCreator.HasTablesAsync())
+                {
+                    await databaseCreator.CreateTablesAsync();
+                }
+            }
+            else
+            {
+                await context.Database.EnsureCreatedAsync();
+            }
         }
 
         if (!await context.BloodGroups.AnyAsync())
